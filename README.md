@@ -50,7 +50,8 @@ __INI config__
   - Controls how many nested levels of array elements and object properties are traced.
   - max value 16
 + var_display_max_depth_name Type: string, Default value: "YTRACE_VAR_DISPLAY_MAX_DEPTH", PHP_INI_SYSTEM.
-==Generally, you don’t need to change the default config of *_name. The value of *_name is used for the name of cookie, environment variable, GET or POST argument==
+
+> Generally, you don’t need to change the default config of *_name. The value of *_name is used for the name of cookie, environment variable, GET or POST argument
 
 __PHP function__
 + ytrace_enable ([$traced_file_name])

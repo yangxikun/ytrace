@@ -51,7 +51,8 @@ __INI 配置__
   - 控制跟踪到的变量值的最大嵌套层级
   - 最大 16
 + var_display_max_depth_name 类型：string，默认值： "YTRACE_VAR_DISPLAY_MAX_DEPTH", PHP_INI_SYSTEM.
-==通常，你不需要修改*_name配置的默认值。*_name的配置是用于设置cookie、环境变量、GET/POST参数的名称。==
+
+> 通常，你不需要修改*_name配置的默认值。*_name的配置是用于设置cookie、环境变量、GET/POST参数的名称。
 
 __PHP 函数__
 + ytrace_enable ([$traced_file_name])
