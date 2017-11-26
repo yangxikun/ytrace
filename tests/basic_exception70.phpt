@@ -17,7 +17,7 @@ echo file_get_contents($tf);
 unlink($tf);
 ?>
 --EXPECTF--
-Fatal error: Uncaught Exception: test basic exception in %sbasic_exception.php:4
+Fatal error: Uncaught Exception: test basic exception in %sbasic_exception70.php:4
 Stack trace:
 #0 {main}
-  thrown in %sbasic_exception.php on line 4
+  thrown in %sbasic_exception70.php on line 4

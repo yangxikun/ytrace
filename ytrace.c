@@ -120,8 +120,10 @@ void ytrace_enable(char *fname, size_t fname_len)
 	}
 	YTRACE_G(trace_file) = fopen(filename.c, "w");
 	if (YTRACE_G(trace_file) == NULL) {
-		php_error(E_ERROR, "Open trace file %s failed!", filename.c);
+		ytrace_str_destroy(&filename);
+		return;
 	}
+	YTRACE_G(trace_filename) = strndup(filename.c, filename.len);
 	ytrace_str_destroy(&filename);
 	/* trace file info */
 	fwrite(YTRACE_G(sapi), 1, strlen(YTRACE_G(sapi)), YTRACE_G(trace_file));
@@ -173,6 +175,19 @@ PHP_FUNCTION(ytrace_disable)
 		fflush(YTRACE_G(trace_file));
 		fclose(YTRACE_G(trace_file));
 		YTRACE_G(trace_file) = NULL;
+#if PHP_VERSION_ID >= 70000
+		RETURN_STRING(YTRACE_G(trace_filename));
+#else
+		RETURN_STRING(YTRACE_G(trace_filename), 1);
+#endif
+		free(YTRACE_G(trace_filename));
+		YTRACE_G(trace_filename) = NULL;
+	} else {
+#if PHP_VERSION_ID >= 70000
+		RETURN_STRING("");
+#else
+		RETURN_STRING("", 1);
+#endif
 	}
 }
 /* The previous line is meant for vim and emacs, so it can correctly fold and 
@@ -201,27 +216,6 @@ PHP_MINIT_FUNCTION(ytrace)
 
 	YTRACE_G(sapi) = sapi_module.name;
 
-	/* init variable display settings */
-	if (YTRACE_G(display_max_children) > 32) {
-		YTRACE_G(display_max_children) = 32;
-	} else if (YTRACE_G(display_max_children) < 1) {
-		YTRACE_G(display_max_children) = 0;
-	}
-
-	if (YTRACE_G(display_max_data) > 1024) {
-		YTRACE_G(display_max_data) = 1024;
-	} else if (YTRACE_G(display_max_data) < 1) {
-		YTRACE_G(display_max_data) = 0;
-	}
-
-	if (YTRACE_G(display_max_depth) > 16) {
-		YTRACE_G(display_max_depth) = 16;
-	} else if (YTRACE_G(display_max_depth) < 1) {
-		YTRACE_G(display_max_depth) = 0;
-	}
-
-	YTRACE_G(var_export_runtime) = (ytrace_var_runtime*)malloc((YTRACE_G(display_max_depth) + 1) * sizeof(ytrace_var_runtime));
-
 	/* hook execute */
 	ytrace_old_execute_ex = zend_execute_ex;
 	zend_execute_ex = ytrace_execute_ex;
@@ -231,6 +225,8 @@ PHP_MINIT_FUNCTION(ytrace)
 
 	/* hook assign/include handler */
 	ytrace_override_handler_init();
+
+	YTRACE_G(var_export_runtime) = (ytrace_var_runtime*)malloc(17 * sizeof(ytrace_var_runtime));
 
 	return SUCCESS;
 }
@@ -297,6 +293,10 @@ PHP_RSHUTDOWN_FUNCTION(ytrace)
 		fflush(YTRACE_G(trace_file));
 		fclose(YTRACE_G(trace_file));
 		YTRACE_G(trace_file) = NULL;
+	}
+	if (YTRACE_G(trace_filename)) {
+		free(YTRACE_G(trace_filename));
+		YTRACE_G(trace_filename) = NULL;
 	}
 
 	if (YTRACE_G(_white_list)) {

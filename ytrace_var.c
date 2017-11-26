@@ -376,6 +376,25 @@ void ytrace_get_zval_value(zval *val, ytrace_str *str)
 	ytrace_str zval_str;
 	ytrace_str_new(&zval_str);
 
+	/* init variable display settings */
+	if (YTRACE_G(display_max_children) > 32) {
+		YTRACE_G(display_max_children) = 32;
+	} else if (YTRACE_G(display_max_children) < 1) {
+		YTRACE_G(display_max_children) = 0;
+	}
+
+	if (YTRACE_G(display_max_data) > 1024) {
+		YTRACE_G(display_max_data) = 1024;
+	} else if (YTRACE_G(display_max_data) < 1) {
+		YTRACE_G(display_max_data) = 0;
+	}
+
+	if (YTRACE_G(display_max_depth) > 16) {
+		YTRACE_G(display_max_depth) = 16;
+	} else if (YTRACE_G(display_max_depth) < 1) {
+		YTRACE_G(display_max_depth) = 0;
+	}
+
 	ytrace_var_export(&val, &zval_str, 0 TSRMLS_CC);
 	tmp_str = ytrace_str_addcslashes(zval_str.c, zval_str.len, &tmp_len);
 	ytrace_str_appendl(str, tmp_str, tmp_len, 0);

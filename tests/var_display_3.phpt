@@ -15,5 +15,5 @@ unlink($tf);
 ?>
 --EXPECTF--
 cli
-/home/rokety/Downloads/php-5.6.31/ext/ytrace/tests/var_display_3.php	4	A	1	$arr	array (\n\t1 => array (\n\t\t\t\'foo\' => array (...)\n\t),\n\t2 => 2,\n\t3 => 3,\n\t4 => 4,\n\t5 => 5\n)
-/home/rokety/Downloads/php-5.6.31/ext/ytrace/tests/var_display_3.php	5	F	2	ytrace_disable	0
+%svar_display_3.php	4	A	1	$arr	array (\n\t1 => array (\n\t\t\t\'foo\' => array (...)\n\t),\n\t2 => 2,\n\t3 => 3,\n\t4 => 4,\n\t5 => 5\n)
+%svar_display_3.php	5	F	2	ytrace_disable	0

@@ -4,6 +4,7 @@ Test basic exception
 --SKIPIF--
 <?php
 if (!extension_loaded("ytrace")) print "skip";
+if (!version_compare(phpversion(), "7.0", '<')) print "skip >= PHP 7.0";
 ?>
 --FILE--
 <?php 

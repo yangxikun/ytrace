@@ -48,6 +48,7 @@ extern zend_module_entry ytrace_module_entry;
 ZEND_BEGIN_MODULE_GLOBALS(ytrace)
 	unsigned long level;
 	FILE *trace_file;
+	char *trace_filename;
 
 	zend_bool	in_eval;
 

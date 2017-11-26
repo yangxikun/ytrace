@@ -29,25 +29,6 @@ ZEND_EXTERN_MODULE_GLOBALS(ytrace)
 #if PHP_VERSION_ID >= 70000
 static int ytrace_is_static_call(const zend_op *cur_opcode, const zend_op *prev_opcode, const zend_op **found_opcode)
 {
-	/*
-	const zend_op *opcode_ptr;
-
-	opcode_ptr = cur_opcode;
-# if PHP_VERSION_ID >= 70100
-	while (!(opcode_ptr->opcode == ZEND_EXT_STMT) && !((opcode_ptr->opcode == ZEND_FETCH_STATIC_PROP_W) || (opcode_ptr->opcode == ZEND_FETCH_STATIC_PROP_RW))) {
-		opcode_ptr = opcode_ptr - 1;
-	}
-	if ((opcode_ptr->opcode == ZEND_FETCH_STATIC_PROP_W) || (opcode_ptr->opcode == ZEND_FETCH_STATIC_PROP_RW)) {
-# else
-	while (!(opcode_ptr->opcode == ZEND_EXT_STMT) && !((opcode_ptr->opcode == ZEND_FETCH_W) || (opcode_ptr->opcode == ZEND_FETCH_RW))) {
-		opcode_ptr = opcode_ptr - 1;
-	}
-	if (((opcode_ptr->opcode == ZEND_FETCH_W) || (opcode_ptr->opcode == ZEND_FETCH_RW)) && opcode_ptr->extended_value == ZEND_FETCH_STATIC_MEMBER) {
-# endif
-		*found_opcode = opcode_ptr;
-		return 1;
-	}
-	*/
 # if PHP_VERSION_ID >= 70100
 	if ((prev_opcode->opcode == ZEND_FETCH_STATIC_PROP_W) || (prev_opcode->opcode == ZEND_FETCH_STATIC_PROP_RW)) {
 # else
@@ -188,16 +169,6 @@ static void *ytrace_find_var_name(ytrace_str *name, zend_execute_data *execute_d
 #endif
 	next_opcode = cur_opcode + 1;
 	prev_opcode = cur_opcode - 1;
-
-	/*
-	if (cur_opcode->opcode == ZEND_QM_ASSIGN) {
-#if PHP_VERSION_ID >= 70000
-		ytrace_str_add(name, ytrace_sprintf("$%s", zend_get_compiled_variable_name(op_array, cur_opcode->result.var)->val), 1);
-#else
-		ytrace_str_add(name, ytrace_sprintf("$%s", zend_get_compiled_variable_name(op_array, cur_opcode->result.var, &cv_len)), 1);
-#endif
-	}
-	*/
 
 	if (cur_opcode->op1_type == IS_VAR &&
 			(next_opcode->op1_type == IS_VAR || cur_opcode->op2_type == IS_VAR) &&
