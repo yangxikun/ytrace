@@ -357,11 +357,11 @@ zval *ytrace_get_zval(zend_execute_data *zdata, int node_type, const znode_op *n
 		}
 
 		case IS_UNUSED:
-			fprintf(stderr, "\nIS_UNUSED\n");
+			//fprintf(stderr, "\nIS_UNUSED\n");
 			break;
 
 		default:
-			fprintf(stderr, "\ndefault %d\n", node_type);
+			//fprintf(stderr, "\ndefault %d\n", node_type);
 			break;
 	}
 
