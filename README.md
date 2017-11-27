@@ -12,6 +12,15 @@ require php >= 5.5
 
 ## Wiki
 __INI config__
+
+config example:
+```
+extension=ytrace.so
+ytrace.output_dir=/tmp/ytrace
+ytrace.output_format=%R_%t
+ytrace.enable_trigger=1
+ytrace.enable_trigger_value=ytrace
+```
 + auto_enable: Type: boolean, Default value: 0, PHP_INI_SYSTEM.
 + enable_trigger: Type: boolean, Default value: 0, PHP_INI_SYSTEM.
   - When this setting is set to 1, you can trigger the generation of trace files by using the YTRACE_TRIGGER GET/POST parameter, or set a cookie with the name YTRACE_TRIGGER, or set an environment variable with the name YTRACE_TRIGGER.

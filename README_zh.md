@@ -10,6 +10,15 @@
 
 ## Wiki
 __INI 配置__
+
+配置示例：
+```
+extension=ytrace.so
+ytrace.output_dir=/tmp/ytrace
+ytrace.output_format=%R_%t
+ytrace.enable_trigger=1
+ytrace.enable_trigger_value=ytrace
+```
 + auto_enable: 类型：boolean，默认值：0, PHP_INI_SYSTEM.
 + enable_trigger: 类型：boolean，默认值：0, PHP_INI_SYSTEM.
   - 当设置为1时，你可以通过名为YTRACE_TRIGGER的GET/POST参数，或cookie，或环境变量来触发跟踪
