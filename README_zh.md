@@ -1,6 +1,7 @@
 这是一个PHP调试/跟踪根据。它能够记录下PHP代码的执行过程，并输出到文件中。[ytrace_gui](https://github.com/yangxikun/ytrace_gui)能够加载跟踪文件，展示执行详细信息，以及调试执行过程。相关的还有[ytrace_chrome_extension](https://github.com/yangxikun/ytrace_chrome_extension)。
 
 ## 安装
+需要 php >= 5.5
 * git clone 当前项目
 * phpize
 * ./configure --enable-ytrace

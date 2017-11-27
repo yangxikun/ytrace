@@ -3,6 +3,7 @@
 This is a php debug/trace tool. It can trace php execution, then output traced information to file. [ytrace_gui](https://github.com/yangxikun/ytrace_gui) can load traced file, show execution detail and debug the execution. See also [ytrace_chrome_extension](https://github.com/yangxikun/ytrace_chrome_extension)
 
 ## install
+require php >= 5.5
 * git clone this project
 * phpize
 * ./configure --enable-ytrace
