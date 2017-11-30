@@ -89,9 +89,9 @@ char* ytrace_str_addcslashes(char* str, int str_len, int *new_len)
 	tmp_zstr = php_addcslashes(i_string, 0, "'\\\0..\37", 6);
 
 	char *tmp_str = estrndup(tmp_zstr->val, tmp_zstr->len);
+	*new_len = tmp_zstr->len;
 	zend_string_release(tmp_zstr);
 	zend_string_release(i_string);
-	*new_len = tmp_zstr->len;
 	return tmp_str;
 #else
 	return php_addcslashes(str, str_len, new_len, 0, "'\\\0..\37", 6 TSRMLS_CC);

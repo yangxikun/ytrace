@@ -46,11 +46,7 @@ void function_entry(zend_bool internal, zend_execute_data *ex TSRMLS_DC)
 #if PHP_VERSION_ID < 70000
 		op_array = ex->op_array;
 #else
-		if (internal) {
-			op_array = &(ex->prev_execute_data->func->op_array);
-		} else {
-			op_array = &(ex->func->op_array);
-		}
+		op_array = &(ex->prev_execute_data->func->op_array);
 		if (!op_array || (op_array->type == 1)) {
 			return;
 		}
@@ -66,7 +62,14 @@ void function_entry(zend_bool internal, zend_execute_data *ex TSRMLS_DC)
 #if PHP_VERSION_ID < 70000
 		ytrace_str_append(&str, ytrace_sprintf("%zu\tF\t%zu\t", ex->opline->lineno, YTRACE_G(level)), 1);
 #else
-		ytrace_str_append(&str, ytrace_sprintf("%zu\tF\t%zu\t", ex->prev_execute_data->opline->lineno, YTRACE_G(level)), 1);
+		if (internal) {
+			ytrace_str_append(&str, ytrace_sprintf("%zu\tF\t%zu\t", zend_get_executed_lineno(), YTRACE_G(level)), 1);
+		} else {
+			if (!ex->prev_execute_data->opline || !ex->prev_execute_data->func || !ZEND_USER_CODE(ex->prev_execute_data->func->type)) {
+				return;
+			}
+			ytrace_str_append(&str, ytrace_sprintf("%zu\tF\t%zu\t", ex->prev_execute_data->opline->lineno, YTRACE_G(level)), 1);
+		}
 #endif
 
 		if (YTRACE_EX_OBJ(ex)) {
@@ -119,6 +122,9 @@ void function_entry(zend_bool internal, zend_execute_data *ex TSRMLS_DC)
 			ytrace_get_zval_value(args[i], &str);
         }
 #else
+		if (!internal) {
+			op_array = &(ex->func->op_array);
+		}
 		if (ZEND_USER_CODE(zf->type)) {
 			arg_wanted = op_array->num_args;
 		}
