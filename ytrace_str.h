@@ -84,4 +84,5 @@ static char *ytrace_sprintf(const char *fmt, ...)
    return p;
 }
 
+/* __HAVE_YTRACE_STR_H__ */
 #endif

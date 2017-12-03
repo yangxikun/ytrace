@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#ifndef __HAVE_YTRACE_EXECUTE_H__
+#define __HAVE_YTRACE_EXECUTE_H__
+
 #include "Zend/zend_API.h"
 
 #if PHP_VERSION_ID >= 70000
@@ -32,4 +35,7 @@ void ytrace_execute_ex(zend_execute_data *execute_data TSRMLS_DC);
 void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
 void ytrace_execute_internal(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
 
+#endif
+
+/* __HAVE_YTRACE_EXECUTE_H__ */
 #endif

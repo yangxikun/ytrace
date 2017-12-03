@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#ifndef __HAVE_YTRACE_VAR_H__
+#define __HAVE_YTRACE_VAR_H__
+
 #include "zend_compile.h"
 #include "ytrace_str.h"
 
@@ -26,3 +30,6 @@ void ytrace_get_zval_value(zval *val, ytrace_str *str);
 void ytrace_var_export(zval **struc, ytrace_str *str, int level TSRMLS_DC);
 char* ytrace_get_val_from_server(char *var_name);
 char* ytrace_get_val_from_http_data(char *var_name);
+
+/* __HAVE_YTRACE_VAR_H__ */
+#endif

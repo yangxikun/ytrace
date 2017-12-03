@@ -14,4 +14,10 @@
  * limitations under the License.
  */
 
+#ifndef __HAVE_YTRACE_OPCODE_HANDLER_OVERRIDE_H__
+#define __HAVE_YTRACE_OPCODE_HANDLER_OVERRIDE_H__
+
 void ytrace_override_handler_init();
+
+/* __HAVE_YTRACE_OPCODE_HANDLER_OVERRIDE_H__ */
+#endif

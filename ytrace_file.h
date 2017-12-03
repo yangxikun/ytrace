@@ -14,5 +14,11 @@
  * limitations under the License.
  */
 
+#ifndef __HAVE_YTRACE_FILE_H__
+#define __HAVE_YTRACE_FILE_H__
+
 #include "ytrace_str.h"
-int ytrace_format_output_filename(ytrace_str *filename, char *format);
+void ytrace_format_output_filename(ytrace_str *filename, char *format);
+
+/* __HAVE_YTRACE_FILE_H__ */
+#endif

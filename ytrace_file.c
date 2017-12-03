@@ -45,7 +45,7 @@ double ytrace_get_utime(void)
 	return 0;
 }
 
-int ytrace_format_output_filename(ytrace_str *filename, char *format)
+void ytrace_format_output_filename(ytrace_str *filename, char *format)
 {
 	char       cwd[128];
 	TSRMLS_FETCH();

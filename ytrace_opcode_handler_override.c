@@ -147,7 +147,7 @@ static int ytrace_include_or_eval_handler(ZEND_USER_OPCODE_HANDLER_ARGS)
 
 /* {{{ ytrace_find_var_name(ytrace_str *name, zend_execute_data *execute_data TSRMLS_DC)
  */
-static void *ytrace_find_var_name(ytrace_str *name, zend_execute_data *execute_data TSRMLS_DC)
+static void ytrace_find_var_name(ytrace_str *name, zend_execute_data *execute_data TSRMLS_DC)
 {
 	const zend_op *cur_opcode, *next_opcode, *prev_opcode = NULL, *opcode_ptr;
 	zval          *dimval;

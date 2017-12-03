@@ -14,4 +14,10 @@
  * limitations under the License.
  */
 
+#ifndef __HAVE_YTRACE_FILTER_H__
+#define __HAVE_YTRACE_FILTER_H__
+
 int ytrace_should_trace(char *filename);
+
+/* __HAVE_YTRACE_FILTER_H__ */
+#endif
