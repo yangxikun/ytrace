@@ -23,6 +23,18 @@
 
 ZEND_EXTERN_MODULE_GLOBALS(ytrace)
 
+#if PHP_VERSION_ID >= 70000
+
+void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
+void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zval *return_value);
+
+#else
+
+void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
+void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
+
+#endif
+
 /* {{{ function_entry(zend_execute_data *ex TSRMLS_DC)
  */
 void function_entry(zend_bool internal, zend_execute_data *ex TSRMLS_DC)

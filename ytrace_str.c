@@ -109,7 +109,7 @@ char* ytrace_str_tab_pad(int len)
 }
 
 // from https://stackoverflow.com/questions/9210528/split-string-with-delimiters-in-c
-char** str_split(char* a_str, const char a_delim)
+char** ytrace_str_split(char* a_str, const char a_delim)
 {
 	a_str = strdup(a_str);
     char** result    = 0;
@@ -158,4 +158,35 @@ char** str_split(char* a_str, const char a_delim)
 	free(a_str);
 
     return result;
+}
+
+char *ytrace_sprintf(const char *fmt, ...)
+{
+   int size = 0;
+   char *p = NULL;
+   va_list ap;
+
+   /* Determine required size */
+
+   va_start(ap, fmt);
+   size = vsnprintf(p, size, fmt, ap);
+   va_end(ap);
+
+   if (size < 0)
+	   return NULL;
+
+   size++;             /* For '\0' */
+   p = malloc(size);
+   if (p == NULL)
+	   return NULL;
+
+   va_start(ap, fmt);
+   size = vsnprintf(p, size, fmt, ap);
+   if (size < 0) {
+	   free(p);
+	   return NULL;
+   }
+   va_end(ap);
+
+   return p;
 }

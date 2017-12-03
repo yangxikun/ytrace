@@ -39,7 +39,8 @@ void ytrace_str_destroy(ytrace_str *str);
 
 char* ytrace_str_addcslashes(char* str, int str_len, int *new_len);
 char* ytrace_str_tab_pad(int len);
-char** str_split(char* a_str, const char a_delim);
+char** ytrace_str_split(char* a_str, const char a_delim);
+char *ytrace_sprintf(const char *fmt, ...);
 
 /* Set correct int format to use */
 #if PHP_VERSION_ID >= 70000
@@ -52,37 +53,6 @@ char** str_split(char* a_str, const char a_delim);
 #else
 # define YTRACE_INT_FMT "%ld"
 #endif
-
-static char *ytrace_sprintf(const char *fmt, ...)
-{
-   int size = 0;
-   char *p = NULL;
-   va_list ap;
-
-   /* Determine required size */
-
-   va_start(ap, fmt);
-   size = vsnprintf(p, size, fmt, ap);
-   va_end(ap);
-
-   if (size < 0)
-	   return NULL;
-
-   size++;             /* For '\0' */
-   p = malloc(size);
-   if (p == NULL)
-	   return NULL;
-
-   va_start(ap, fmt);
-   size = vsnprintf(p, size, fmt, ap);
-   if (size < 0) {
-	   free(p);
-	   return NULL;
-   }
-   va_end(ap);
-
-   return p;
-}
 
 /* __HAVE_YTRACE_STR_H__ */
 #endif

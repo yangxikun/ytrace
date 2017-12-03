@@ -28,7 +28,7 @@ int ytrace_should_trace(char *filename)
 	int  match = 0;
 
 	if (strlen(YTRACE_G(white_list)) > 0) {
-		patterns = str_split(YTRACE_G(white_list), ',');
+		patterns = ytrace_str_split(YTRACE_G(white_list), ',');
 		if (patterns) {
 			for (i = 0; *(patterns + i); i++)
 			{
@@ -43,7 +43,7 @@ int ytrace_should_trace(char *filename)
 	}
 
 	if (strlen(YTRACE_G(black_list)) > 0) {
-		patterns = str_split(YTRACE_G(black_list), ',');
+		patterns = ytrace_str_split(YTRACE_G(black_list), ',');
 		if (patterns) {
 			for (i = 0; *(patterns + i); i++)
 			{

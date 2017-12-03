@@ -21,18 +21,18 @@
 
 #if PHP_VERSION_ID >= 70000
 
-void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
+extern void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
 void ytrace_execute_ex(zend_execute_data *execute_data TSRMLS_DC);
 
-void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zval *return_value);
+extern void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zval *return_value);
 void ytrace_execute_internal(zend_execute_data *current_execute_data, zval *return_value);
 
 #else
 
-void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
+extern void (*ytrace_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
 void ytrace_execute_ex(zend_execute_data *execute_data TSRMLS_DC);
 
-void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
+extern void (*ytrace_old_execute_internal)(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
 void ytrace_execute_internal(zend_execute_data *current_execute_data, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
 
 #endif
